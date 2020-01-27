@@ -26,8 +26,52 @@
         {% endif %}
     {% endwith %}
     <br>
-    <a href="/logout"><buttton>Logout</buttton></a>
-    <h2>Hi {{users['first_name']}} {{users['first_name']}}!</h2>
+    <a href="/logout" class='text-left'><buttton class="text-left">Logout</buttton></a>
+        <h2>Hi {{users['first_name']}} {{users['last_name']}}!</h2>
+            <h1 class="display-3 text-center">Create Your Profile</h1>
     <p>Please fill out the rest of the required information to access the home page</p>
+    <br>
+    <div class="card pb-3">
+        <div class="card_body m-5">
+            <div class="card-title">Upload your Profile Photo</div>
+            <img src="/images/pathToYourImage.png" class="img-fluid" alt="Responsive image">
+            <br>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+    </div>
+    <br>
+    <form action="/finish" method="POST">
+        <div class="form-group 20% p-1 m-5">
+          <label for="formGroupExampleInput">College/University:</label>
+          <p><input type="text" name="college"></p>
+        </div>
+        <div class="form-group 20% p-1 m-5">
+          <label for="formGroupExampleInput2">City/Town</label>
+          <p><input type="text" name="city"><p>
+              <br>
+        <h4> Instruments:</h4>
+            <p>Select some of the istruments you play:</p>
+            <label for="guitar">Guitar</label>
+            <input type="checkbox" id="blue" name="guitar" value="blue">
+            <label for="bass">Bass</label>
+            <input type="checkbox" id="green" name="bass" value="green">
+            <label for="trumpet">Trumpet</label>
+            <input type="checkbox" id="red" name="trumpet" value="red">
+            <label for="black">Violin</label>
+            <input type="checkbox" id="black" name="violin" value="black">
+            <label for="purple">Drums</label>
+            <input type="checkbox" id="purple" name="Drums" value="Purple">
+            <br>
+         <h4>About you:</h4><textarea name="about" id="" cols="30" rows="10" class="form-group 20% m-5"></textarea>
+         <input type="submit" value="Submit">
+        </div>
+      </form>
+      <nav class="navbar fixed-bottom navbar-dark bg-dark p-3 m-2">
+        <a class="navbar-brand" href="/homepage">Updates</a>
+        <a class="navbar-brand" href="/signups">SignUps</a>
+        <a class="navbar-brand" href="/local">Locals</a>
+        <a class="navbar-brand" href="/concert">Concerts Near You</a>
+        <a class="navbar-brand" href="/classes">Classes</a>
+      </nav>
 </body>
 </html>

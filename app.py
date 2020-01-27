@@ -93,7 +93,7 @@ def login():
         flash('invalid password or email')
         return redirect("/")
 
-@app.route("/hompage")
+@app.route("/homepage")
 def homepage():
     mysql = connectToMySQL('jam')
     query = "SELECT first_name, last_name FROM users WHERE user_id(%(id)s)"
@@ -102,8 +102,24 @@ def homepage():
     }
     homes = mysql.query_db(query, data)
     if homes:
-        users = homes[0]
-    return render_template("index.html", users = users)
+        homes = homes[0]
+    return render_template("index.html", users = homes)
+
+@app.route("/signups")
+def signups():
+    mysql = connectToMySQL('jam')
+    query = "SELECT first_name, last_name FROM users WHERE user_id(%(id)s)"
+    data = {
+        'id': session['user_id'] 
+    }
+    homes = mysql.query_db(query, data)
+    if homes:
+        homes = homes[0]
+    return render_template("signus.html", homes=homes)
+    
+@app.route("/reherse", methods =['POST'])
+def reherese():
+    return render_template('signus.html')
 
 @app.route("/logout")
 def logout():
