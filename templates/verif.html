@@ -34,9 +34,9 @@
     <div class="card pb-3">
         <div class="card_body m-5">
             <div class="card-title">Upload your Profile Photo</div>
-            <img src="/images/pathToYourImage.png" class="img-fluid" alt="Responsive image">
+            <img src="{{ url_for('static', filename='imgs/duckduckgo.jpg') }}" alt ='gnome' style="width:200px;height:200px" class="border border-dark 1px p-2 rounded">
             <br>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            <input type="file" class="form-control-file text-center" id="exampleFormControlFile1">
         </div>
     </div>
     <br>

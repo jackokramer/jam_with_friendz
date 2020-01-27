@@ -66,6 +66,43 @@ def verif():
         users = results[0]
     return render_template('verif.html', users=users)
 
+@app.route("/finish", methods= ['POST'])
+def finish():
+    is_valid = True
+    if len(request.form['college'])<1:
+        is_valid = False
+        flash("please do not leave the field blank")
+    if len(request.form['city'])<1:
+        is_valid = False
+        flash("please do not leave the field blank")
+    # HAVING difficulty on how to sort these verifications out.
+    #if len(request.form['guitar'])
+    #if len(request.form['bass'])
+    #if len(request.form['trumpet'])
+    #if len(request.form['violin'])
+    #if len(request.form['drums'])
+    if len(request.form['about'])<1 :
+        is_valid = False
+        flash("please fill in the bio section")
+    if len(request.form['about'])>256 :
+        is_valid = False
+        flash("please limit the character count to 256 or less")
+    else:
+        mysql = connectToMySQL('jam')
+        query =  "INSERT INTO extras(college, city, instrument, about) VALUES(%(cl)s, %(ci)s, %(in)s, %(ab)s)"
+        data = {
+            "cl": request.form['college'],
+            "ci": request.form['city'],
+            #"in": request.form['instruments'],
+            "ab": request.form['about']
+        }
+        finished = mysql.query_db(query, data)
+        if finished:
+            session['user_id'] = finished
+        return redirect("/")
+
+    
+
 @app.route("/login", methods= ['POST'])
 def login():
     is_valid = True
@@ -91,7 +128,7 @@ def login():
 
     if not is_valid:
         flash('invalid password or email')
-        return redirect("/")
+        return redirect("/homepage")
 
 @app.route("/homepage")
 def homepage():
