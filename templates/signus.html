@@ -43,34 +43,36 @@
             </script>
         </div>
         -->
-        <form action="/reherse" method="post" class="p-4 m-5">
-            <p>Name:<input type="text" name="name"></p>
-            <p>Number of People:<input type="text" name="name"></p>
-            <input type="submit" value="Sign Up">
-        </form>
-        <br>
-        <div class="card">
-            <div class="card-body">
-                <h3 class="text-center">Locations</h3>
+        <div class="row">
+            <div class="col-md">
+                <form action="/reherse" method="post" class="p-4 m-5">
+                    <p>Name:<input type="text" name="name"></p>
+                    <p>Number of People:<input type="text" name="name"></p>
+                    <input type="submit" value="Sign Up">
+                </form>
                 <br>
-              <div id="googleMap" style="width:65%;height:275px;" class="center"></div>
-              <script>
-                  function myMap() {
-                  var location = {lat: 37.161748, lng:-121.97219}
-                  var map = new google.maps.Map(document.getElementById("googleMap"), {zoom:11, center:location});
-                  var marker = new google.maps.Marker()
-                  marker.setPosition(location);
-                  marker.setMap(map); // missing the pin marker.
-                  }
-                  
-              </script>
+                <div class="col-lg">
+                        <h3 class="text-center">Locations</h3>
+                        <br>   
+                    <div id="googleMap" style="width:65%;height:275px;" class="center">
+                        <script>
+                            function myMap() {
+                            var location = {lat: 37.161748, lng:-121.97219}
+                            var map = new google.maps.Map(document.getElementById           ("googleMap"), {zoom:11, center:location});
+                            var marker = new google.maps.Marker()
+                            marker.setPosition(location);
+                            marker.setMap(map); // missing the pin marker.
+                            }
+                        
+                        </script>
+                    </div>
+                </div>
             </div>
-          </div> <!--WORK MORE ON API AND GET AN API FOREIGN KEY-->
         </div>
         <nav class="navbar fixed-bottom navbar-dark bg-dark p-3 m-2">
             <a class="navbar-brand" href="/homepage">Updates</a>
             <a class="navbar-brand" href="/signups">SignUps</a>
-            <a class="navbar-brand" href="/local">Locals</a>
+            <a class="navbar-brand" href="/stores">Local Shops/Venues</a>
             <a class="navbar-brand" href="/concert">Concerts Near You</a>
             <a class="navbar-brand" href="/classes">Classes</a>
           </nav>

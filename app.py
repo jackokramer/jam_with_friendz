@@ -158,10 +158,24 @@ def signups():
 def reherese():
     return render_template('signus.html')
 
+@app.route("/stores")
+def stores():
+    return render_template('stores.html')
+
+@app.route("/concerts")
+def concerts():
+    return render_template("concerts.html")
+
+@app.route("/sessions")
+def upcoming():
+    return render_template('logged_sess.html')
+
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect('/')
+
+
 
 if "__main__" == __name__:
     app.run(debug=True, port=5001)

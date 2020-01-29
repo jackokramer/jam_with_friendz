@@ -16,6 +16,60 @@
     <title>Concerts</title>
 </head>
 <body>
-    
+    <h1 class="display-3 text-center">Concerts Near You</h1>
+    <br>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="row">
+                <div class="col-md">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class=" display-3 card-title">Shows and Concerts</h2>
+                        <br>
+                        <br>
+                            <ul>
+                                <li>
+                                    <h4>1/ 25 - Joe Shit the Rag Man and Gravel Gurdy @ the Catalyst</h4>
+                                </li>
+                            <br>
+                                <li>
+                                    <h4> 1/23 - Foxtrot Hound @ The Masonic</h4>
+                                </li>
+                            <br>
+                                <li>
+                                    <h4>1/29 - Messiah @ Moe's Alley</h4>
+                                </li>
+                            <br>
+                                <li>
+                                    <h4> 1/31 - Big Rusty Bake Machine @ Santa Cruz Civic Auditorium</h4>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="img-center">
+                    <img src="{{ url_for('static', filename='imgs/hands.jpeg') }}" alt ='gnome' style="width:200px;height:200px" class="border border-dark 1px p-2 rounded">
+                    </div>
+                    <br>
+                    <br>
+                    <h2 class="text-center">Ticket Distributors/Vendors</h2>
+                    <br>
+                    <ul>
+                        <h5 class="text-center"><a href="https://www.ticketmaster.com">Tickermaster</a></h5>
+                        <h5 class="text-center"><a href="https://www.stubhub.com">StubHub</a></h5>
+                        <h5 class="text-center"><a href="https://www.aws.com">AWS</a></h5>
+                        <h5 class="text-center"><a href="https://www.ticketmaster.com">Tickermaster</a></h5>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    <nav class="navbar fixed-bottom navbar-dark bg-dark p-3 m-2">
+        <a class="navbar-brand" href="/homepage">Updates</a>
+        <a class="navbar-brand" href="/signups">SignUps</a>
+        <a class="navbar-brand" href="/stores">Local Shops/Venues</a>
+        <a class="navbar-brand" href="/concert">Concerts Near You</a>
+        <a class="navbar-brand" href="/classes">Classes</a>
+      </nav>
 </body>
 </html>
