@@ -89,7 +89,7 @@ def finish():
         flash("please limit the character count to 256 or less")
     else:
         mysql = connectToMySQL('jam')
-        query =  "INSERT INTO extras(college, city, instrument, about) VALUES(%(cl)s, %(ci)s, %(in)s, %(ab)s)"
+        query =  "INSERT INTO extras(college, city, about) VALUES(%(cl)s, %(ci)s, %(ab)s)"
         data = {
             "cl": request.form['college'],
             "ci": request.form['city'],
@@ -99,7 +99,7 @@ def finish():
         finished = mysql.query_db(query, data)
         if finished:
             session['user_id'] = finished
-        return redirect("/")
+        return redirect("/homepage")
 
     
 
@@ -111,8 +111,11 @@ def login():
         flash("email cannot be blank")
     #if len(request.form['password'])<1:
     mysql = connectToMySQL('jam')
-    query = "SELECT user_id, email, password FROM users WHERE email = %(em)s"
-    data = { 'em': request.form['email']}
+    query = "SELECT user_id, email, password FROM users WHERE email = %(em)s AND user_id = %(ud)s"
+    data = { 
+        'em': request.form['email'],
+        'ud': session['user_id']
+    }
     logged = mysql.query_db(query, data)
 
     if logged:
@@ -156,6 +159,8 @@ def signups():
     
 @app.route("/reherse", methods =['POST'])
 def reherese():
+    mysql = connectToMySQL('jam')
+    query = "INSERT into spaces(')"
     return render_template('signus.html')
 
 @app.route("/stores")
