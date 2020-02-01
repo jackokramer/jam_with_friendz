@@ -89,12 +89,13 @@ def finish():
         flash("please limit the character count to 256 or less")
     else:
         mysql = connectToMySQL('jam')
-        query =  "INSERT INTO extras(college, city, about) VALUES(%(cl)s, %(ci)s, %(ab)s)"
+        query =  "INSERT INTO extras(college, city, about, user_id) VALUES(%(cl)s, %(ci)s, %(ab)s, %(id)s)"
         data = {
             "cl": request.form['college'],
             "ci": request.form['city'],
             #"in": request.form['instruments'],
-            "ab": request.form['about']
+            "ab": request.form['about'],
+            'id': session['user_id']
         }
         finished = mysql.query_db(query, data)
         if finished:
@@ -135,8 +136,9 @@ def login():
 
 @app.route("/homepage")
 def homepage():
+    print(session['user_id'])
     mysql = connectToMySQL('jam')
-    query = "SELECT first_name, last_name FROM users WHERE user_id(%(id)s)"
+    query = "SELECT first_name, last_name FROM users WHERE user_id =%(id)s"
     data = {
         'id': session['user_id'] 
     }
@@ -148,7 +150,7 @@ def homepage():
 @app.route("/signups")
 def signups():
     mysql = connectToMySQL('jam')
-    query = "SELECT first_name, last_name FROM users WHERE user_id(%(id)s)"
+    query = "SELECT first_name, last_name FROM users WHERE user_id= %(id)s"
     data = {
         'id': session['user_id'] 
     }

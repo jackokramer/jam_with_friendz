@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        #map{
+            width: 400px;
+            height: 400px;
+        }
+    </style>
     <link rel="stylesheet" href="style.css">
     <script
     src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -14,50 +20,54 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <title>Store&Shops</title>
-    
 </head>
 <body>
     <a href="/logout" class='text-left btn btn-primary btn-circle m-5 p-1'><buttton>Logout</buttton></a>
     <br>
     <h1 class="display-3 text-center">Local Shops and Venues</h1>
-    <div class="jumbotron jumbotron-fluid">
-            <div class="container">
+    <div class="jumbotron">
+            <div class="row">
+                <div class="col-md p-4 m-3">
                 <h1 class="display-3">Local Stores</h1>
-                <br>
-                    <ul>
-                        <li class="lead"> <h4>Sylvan Music</h4> 
-                            <p>1521 Mission St, Santa Cruz, CA 95060</p>
-                        </li>
-                        <li class="lead">
-                            <h4 class="lead">Starving Musician</h4>
-                                <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
-                        </li>
-                        <li class="lead">
-                            <h4 class="lead">More Music</h4>
-                                <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
-                        </li>
-                        <li class="lead">
-                            <h4 class="lead">Starving Musician</h4>
-                                <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
-                        </li>
-                        <li class="lead">
-                            <h4 class="lead">Midtown Guitar Shop</h4>
-                                <p>926 Soquel Ave, Santa Cruz, CA 95062</p>
-                        </li>
-                    </ul>
                     <br>
-                        <h2 class="p-3 m-3">Concert Halls/ Venues</h2>
                         <ul>
-                            <li class="lead"> <h4>The Catalyst</h4> 
-                                <p>1011 Pacific Ave, Santa Cruz, CA 95060</p>
+                            <li class="lead"> <h4>Sylvan Music</h4> 
+                                <p>1521 Mission St, Santa Cruz, CA 95060</p>
                             </li>
-                            <li class="lead"> <h4>Moe's Alley</h4> 
-                                <p>1535 Commercial Way, Santa Cruz, CA 95060</p>
+                            <li class="lead">
+                                <h4 class="lead">Starving Musician</h4>
+                                    <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
                             </li>
-                            <li class="lead"> <h4>Civic Auditorium</h4> 
-                                <p>307 Church St, Santa Cruz, CA 95060</p>
+                            <li class="lead">
+                                <h4 class="lead">More Music</h4>
+                                    <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
                             </li>
-                    </ul>
+                            <li class="lead">
+                                <h4 class="lead">Starving Musician</h4>
+                                    <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
+                            </li>
+                            <li class="lead">
+                                <h4 class="lead">Midtown Guitar Shop</h4>
+                                    <p>926 Soquel Ave, Santa Cruz, CA 95062</p>
+                            </li>
+                        </ul>
+                        <br>
+                            <h2 class="p-3 m-3">Concert Halls/ Venues</h2>
+                            <ul>
+                                <li class="lead"> <h4>The Catalyst</h4> 
+                                    <p>1011 Pacific Ave, Santa Cruz, CA 95060</p>
+                                </li>
+                                <li class="lead"> <h4>Moe's Alley</h4> 
+                                    <p>1535 Commercial Way, Santa Cruz, CA 95060</p>
+                                </li>
+                                <li class="lead"> <h4>Civic Auditorium</h4> 
+                                    <p>307 Church St, Santa Cruz, CA 95060</p>
+                                </li>
+                        </ul>
+                    </div>
+                        <div id="map" class="col-md p-4 m-3">
+                            <h1>Locations</h1>
+                    </div>
             </div>
       </div>
       <br>
@@ -69,4 +79,13 @@
         <a class="navbar-brand" href="/classes">Classes</a>
       </nav>
 </body>
+    <script>
+        function initMap(){
+            var location = {lat: 36.974117, lng: -122.030792};
+            var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 9, center: location});
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAubuClBmzeknheleX7MIY_4FmTGjJ_CKg&callback=initMap"
+    type="text/javascript"></script>
 </html>

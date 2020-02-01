@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <style>
+        #map{
+            width: 400px;
+            height: 400px;
+        }
+    </style>
     <script
     src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
@@ -22,7 +28,6 @@
     <a href="/logout" class='text-left'><buttton>Logout</buttton></a>
         <h1 class="display-3 text-center">Sign Up and Jam</h1>
         <br>
-        <h3 class="p-2 m-3">Rehersal Space Availbilities</h3>
         <br>
         <!-- Doesn't work...
         <div style="overflow:hidden;">
@@ -43,6 +48,8 @@
             </script>
         </div>
         -->
+        <div class="jumbotron p-3 m-3">
+            <h3 class="p-2 m-3">Rehersal Space Availbilities</h3>
         <div class="row">
             <div class="col-md">
                 <form action="/reherse" method="post" class="p-4 m-5">
@@ -50,25 +57,15 @@
                     <p>Number of People:<input type="text" name="number_people"></p>
                     <input type="submit" value="Sign Up">
                 </form>
-                <br>
-                <div class="col-lg">
+                <div class="col-ld m-5 pb-3">
                         <h3 class="text-center">Locations</h3>
                         <br>   
-                    <div id="googleMap" style="width:65%;height:275px;" class="center">
-                        <script>
-                            function myMap() {
-                            var location = {lat: 37.161748, lng:-121.97219}
-                            var map = new google.maps.Map(document.getElementById           ("googleMap"), {zoom:11, center:location});
-                            var marker = new google.maps.Marker()
-                            marker.setPosition(location);
-                            marker.setMap(map); // missing the pin marker.
-                            }
-                        
-                        </script>
+                    <div id="map" style="width:65%;height:275px;" class="center">
                     </div>
                 </div>
             </div>
         </div>
+    </div>
         <nav class="navbar fixed-bottom navbar-dark bg-dark p-3 m-2">
             <a class="navbar-brand" href="/homepage">Updates</a>
             <a class="navbar-brand" href="/signups">SignUps</a>
@@ -77,4 +74,13 @@
             <a class="navbar-brand" href="/classes">Classes</a>
           </nav>
 </body>
+<script>
+    function initMap(){
+        var location = {lat: 36.974117, lng: -122.030792};
+        var map = new google.maps.Map(
+    document.getElementById('map'), {zoom: 9, center: location});
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAubuClBmzeknheleX7MIY_4FmTGjJ_CKg&callback=initMap"
+type="text/javascript"></script>
 </html>
