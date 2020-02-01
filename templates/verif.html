@@ -56,19 +56,13 @@
                         </div>
                     </div>
                     <div class="col-md">
-                        <h4> Instruments:</h4>
+                        <h4>Instruments:</h4>
                             <br>
-                                <p>Select some of the istruments you play:</p>
-                                <label for="guitar">Guitar</label>
-                                <input type="checkbox" id="blue" name="guitar" value="blue">
-                                <label for="bass">Bass</label>
-                                <input type="checkbox" id="green" name="bass" value="green">
-                                <label for="trumpet">Trumpet</label>
-                                <input type="checkbox" id="red" name="trumpet" value="red">
-                                <label for="black">Violin</label>
-                                <input type="checkbox" id="black" name="violin" value="black">
-                                <label for="purple">Drums</label>
-                                <input type="checkbox" id="purple" name="Drums" value="Purple">
+                                <p>Select some of the instruments you play:</p>
+                                {% for instrument in instruments %}
+                                <label for="{{instrument.name}}">{{instrument.name}}</label>
+                                <input type="checkbox" id="{{instrument.name}}" name="instruments" value="{{instrument.id}}">
+                                {% endfor %}
                             <br>
                             <br>
                         <h4>About you:</h4><textarea name="about" id="" cols="50" rows="10" class="form-group 20% m-5"></textarea>
