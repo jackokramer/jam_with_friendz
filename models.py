@@ -29,29 +29,29 @@ class User(db.Model):
     major = db.Column(db.String(255))
     instruments = db.relationship('Instrument', secondary=user_instruments)
     genre_id = db.Column(db.Integer, db.ForeignKey('genre.id'))
-    genre = db.relationship('Genre', secondary=users)
+    genre = db.relationship('Genre', foreign_keys=[genre_id], backref='users')
     proficiency = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
     def profile_validate(self, form):
         is_valid = True
-        if len(request.form['college'])<1:
+        if len(form['college'])<1:
             is_valid = False
             flash("please do not leave the field blank")
-        if len(request.form['city'])<1:
+        if len(form['city'])<1:
             is_valid = False
             flash("please do not leave the field blank")
         # HAVING difficulty on how to sort these verifications out.
-        #if len(request.form['guitar'])
-        #if len(request.form['bass'])
-        #if len(request.form['trumpet'])
-        #if len(request.form['violin'])
-        #if len(request.form['drums'])
-        if len(request.form['about'])<1 :
+        #if len(form['guitar'])
+        #if len(form['bass'])
+        #if len(form['trumpet'])
+        #if len(form['violin'])
+        #if len(form['drums'])
+        if len(form['about'])<1 :
             is_valid = False
             flash("please fill in the bio section")
-        if len(request.form['about'])>256 :
+        if len(form['about'])>256 :
             is_valid = False
             flash("please limit the character count to 256 or less")
         return is_valid
@@ -67,32 +67,32 @@ class User(db.Model):
     @classmethod
     def reg_validate(cls, form):
         is_valid = True
-        if not EMAIL_REGEX.match(request.form['email']):
+        if not EMAIL_REGEX.match(form['email']):
             is_valid = False
             flash("please enter in a valid email")
-        if request.form['password'] != request.form['c_password']:
+        if form['password'] != form['c_password']:
             is_valid = False
             flash('passwords must match')
-        if len(request.form['first_name']) < 1:
+        if len(form['first_name']) < 1:
             is_valid = False
             flash("please use more than one character")
-        if len(request.form['last_name']) < 1:
+        if len(form['last_name']) < 1:
             is_valid = False
             flash("please use more than one character")
-        if len(request.form['password']) < 8:
+        if len(form['password']) < 8:
             is_valid = False
             flash("please use more than eight characters")
-        if len(request.form['c_password']) < 8:
+        if len(form['c_password']) < 8:
             is_valid = False
             flash("please use more than eight characters")
         return is_valid
     @classmethod
     def add_new_user(cls, form):
-        pw_hash = bcrypt.generate_password_hash(form['pw'])
+        pw_hash = bcrypt.generate_password_hash(form['password'])
         new_user = cls(
             first_name = form['first_name'],
             last_name = form['last_name'],
-            email = form['email']
+            email = form['email'],
             password = pw_hash
         )
         db.session.add(new_user)
@@ -146,7 +146,7 @@ class Post(db.Model):
 class Rehearsal_space(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     location = db.Column(db.String(255))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade', nullable=False))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
     user = db.relationship('User', foreign_keys=[user_id], backref='spaces')
     # available dates
     created_at = db.Column(db.DateTime, server_default=func.now())
@@ -156,9 +156,9 @@ class Jam_session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
-    space_id = db.Column(db.Integer, db.ForeignKey('rehearsal_space.id', ondelete='cascade', nullable=False))
+    space_id = db.Column(db.Integer, db.ForeignKey('rehearsal_space.id', ondelete='cascade'), nullable=False)
     space = db.relationship('Rehearsal_space', foreign_keys=[space_id], backref='sessions')
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade', nullable=False))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
     host = db.relationship('User', foreign_keys=[user_id], backref='sessions')
     attendance_limit = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, server_default=func.now())

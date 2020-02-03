@@ -59,14 +59,7 @@ def login():
         return redirect("/homepage")
 
 def homepage():
-    mysql = connectToMySQL('jam')
-    query = "SELECT first_name, last_name FROM users WHERE user_id(%(id)s)"
-    data = {
-        'id': session['user_id'] 
-    }
-    homes = mysql.query_db(query, data)
-    if homes:
-        homes = homes[0]
+    homes = User.current_user(session['user_id'])
     return render_template("index.html", users = homes)
 
 def signups():
@@ -80,8 +73,7 @@ def signups():
         homes = homes[0]
     return render_template("signus.html", homes=homes)
     
-@app.route("/reherse", methods =['POST'])
-def reherese():
+def rehearse():
     mysql = connectToMySQL('jam')
     query = "INSERT into spaces(')"
     return render_template('signus.html')
