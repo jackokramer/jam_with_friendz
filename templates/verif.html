@@ -65,6 +65,14 @@
                                 {% endfor %}
                             <br>
                             <br>
+                        <h4>Favorite Music Genre:</h4>
+                            <select name="genre">
+                                {% for genre in genres %}
+                                <option value="{{genre.id}}">{{genre.name}}</option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                            <br>
                         <h4>About you:</h4><textarea name="about" id="" cols="50" rows="10" class="form-group 20% m-5"></textarea>
                         <input type="submit" value="Submit" class="btn btn-primary">
                         </div>

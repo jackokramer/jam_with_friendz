@@ -61,6 +61,7 @@ class User(db.Model):
         for inst_id in form.getlist('instruments'):
             instrument = Instrument.query.get(inst_id)
             self.instruments.append(instrument)
+        self.genre = form['genre']
         self.about = form['about']
         db.session.commit()
     
@@ -136,6 +137,11 @@ class Genre(db.Model):
     name = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+
+    @classmethod
+    def get_list(cls):
+        genre = cls.query.all()
+        return genre
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)

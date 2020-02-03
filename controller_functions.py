@@ -18,7 +18,8 @@ def regis():
 def verif():
     user = User.current_user(session['user_id'])
     instruments = Instrument.get_list()
-    return render_template('verif.html', user=user, instruments=instruments)
+    genre = Genre.get_list()
+    return render_template('verif.html', user=user, instruments=instruments, genres=genre)
 
 def finish():
     user = User.current_user(session['user_id'])
