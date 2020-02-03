@@ -3,8 +3,6 @@ from models import User, Instrument, Genre, Post, Rehearsal_space, Jam_session
 from flask import render_template, request, redirect, session, flash
 import re
 
-
-
 def index():
     return render_template('login.html')
 
@@ -40,20 +38,21 @@ def homepage():
     homes = User.current_user(session['user_id'])
     return render_template("index.html", users = homes)
 
+def profile(id):
+    current_user = User.current_user(session['user_id'])
+    user = User.current_user(id)
+    instruments = ""
+    for instrument in user.instruments:
+        instruments += f"{instrument.name}, "
+    instruments = instruments[:len(instruments)-2]
+    return render_template("profile.html", current_user = current_user, user = user, instruments = instruments)
+
 def signups():
-    mysql = connectToMySQL('jam')
-    query = "SELECT first_name, last_name FROM users WHERE user_id(%(id)s)"
-    data = {
-        'id': session['user_id'] 
-    }
-    homes = mysql.query_db(query, data)
-    if homes:
-        homes = homes[0]
-    return render_template("signus.html", homes=homes)
+    user = User.current_user(session['user_id'])
+    return render_template("signus.html", homes=user)
     
 def rehearse():
-    mysql = connectToMySQL('jam')
-    query = "INSERT into spaces(')"
+    # create new rehearsal
     return render_template('signus.html')
 
 def stores():

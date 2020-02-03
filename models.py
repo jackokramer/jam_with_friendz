@@ -100,11 +100,11 @@ class User(db.Model):
         return new_user
     @classmethod
     def log_validate(cls, form):
-        user = cls.query.filter_by(username=form['un']).all()
+        user = cls.query.filter_by(email=form['email']).all()
         if not user:
-            flash('Username not found', 'log_un')
-        elif not bcrypt.check_password_hash(user[0].password, form['pw']):
-            flash('Password is incorrect', 'log_pw')
+            flash('email doesnt exist', 'log_un')
+        elif not bcrypt.check_password_hash(user[0].password, form['password']):
+            flash('invalid password or email', 'log_pw')
         if '_flashes' in session.keys():
             return False
         return user[0]
