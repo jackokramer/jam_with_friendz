@@ -30,33 +30,11 @@ def finish():
     return redirect('/verif')
 
 def login():
-    is_valid = True
-    if len(request.form['email'])<1:
-        is_valid = False
-        flash("email cannot be blank")
-    #if len(request.form['password'])<1:
-    mysql = connectToMySQL('jam')
-    query = "SELECT user_id, email, password FROM users WHERE email = %(em)s AND user_id = %(ud)s"
-    data = { 
-        'em': request.form['email'],
-        'ud': session['user_id']
-    }
-    logged = mysql.query_db(query, data)
-
-    if logged:
-        user = logged[0]
-        if bcrypt.check_password_hash(user['password'], request.form['password']):
-            session['user_id'] = user['user_id']
-            return redirect('/homepage')
-        else:
-            is_valid = False
-    else:
-        is_valid = False
-        flash('email doesnt exist')
-
-    if not is_valid:
-        flash('invalid password or email')
-        return redirect("/homepage")
+    user = User.log_validate(request.form)
+    if not user:
+        return redirect('/')
+    session['user_id'] = user.id
+    return redirect("/homepage")
 
 def homepage():
     homes = User.current_user(session['user_id'])
