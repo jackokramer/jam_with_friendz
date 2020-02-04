@@ -5,108 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        #map{
-            width: 400px;
-            height: 400px;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: azure;
-            font-family: sans-serif, arial;
-        }
-
-        h1{
-            margin: 30px;
-            color: #313131;
-            font-size: 42px;
-            font-weight: 400;
-            text-align: center;
-        }
-
-        h1 span{
-            font-family: sans-serif, Arial, Helvetica;
-            font-weight: 200;
-        }
-
-        .date-picker{
-            position: relative;
-            width: 90%;
-            max-width: 310px;
-            height:60px;
-            background-color: #fafafa;
-            margin: 30px auto;
-            box-shadow: 0px 3px 10px rgba(0, 0, 0, .2);
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .date-picker .selected_date{
-            width: 100px;
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 28px;
-        }
-
-        .date-picker:hover{
-            background-color: seashell;
-        }
-
-        .date-picker .dates{
-            display: none;
-            position: absolute;
-            top: 100px;
-            left: 0;
-            right: 0;
-        }
-        .date-picker .dates.active{
-            display: block;
-        }
-        .date-picker .dates .month{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #EEE;
-        }
-        .date-picker .dates .month .arrows{
-            width: 15px;
-            height: 35px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #311311;
-            font-size: 20px;
-        }
-        date-picker .dates .month .arrows:hover{
-            background-color: skyblue;
-        }
-        date-picker .dates .month .arrows:active{
-            background-color:snow;
-        }
-        .date-picker .dates .days{
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            height: 200px;
-        }
-        .date-picker .dates .days .day{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .date-picker .dates .days .day.selected{
-            background-color: steelblue;
-            color:#313131;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> <!--Assuming staic everything in the folder-->
+    <link href="jquery.datetimepicker.min.css" rel="stylesheet">   
     <script
     src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
@@ -158,7 +58,10 @@
                         </div>
                         </div>
                 </div>
-            
+            <div class="container mt-5 mb-5" style="width: 400px">
+                <h3>Date Picker</h3>
+                <input type="text" id="picker" class="form-control">
+            </div>
         <div class="jumbotron p-3 m-3">
             <h3 class="p-2 m-3">Rehersal Space Availbilities</h3>
         <div class="row">
@@ -195,124 +98,20 @@
     document.getElementById('map'), {zoom: 9, center: location});
     }
 </script>
-<!--DATE PICKER-->
-<script>
-    const date_picker_element = document.querySelector('.date-picker');
-    const selected_date_element = document.querySelector('.date-picker .selected-date');
-    const dates_element = document.querySelector('.date-picker .dates');
-    const mth_element = document.querySelector('.date-picker .dates .month .mth');
-    const next_mth_element = document.querySelector('.date-picker .dates .month .next-mth');
-    const prev_mth_element = document.querySelector('.date-picker .dates .month .prev-mth')
-    const days_element = document.querySelector('.date-picker .dates .days');
-    const months = ['January', 'Febraury', 'March' , 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-    let date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth();
-    let year = date.getFullYear();
-
-    let selectedDate = date;
-    let selectedDay = day;
-    let selectedMonth = month;
-    let selectedYear = year;
-
-    mth_element.textContent = months[months] + '' + year;
-
-    selected_date_element.textContent = format(date);
-
-    populateDate();
-
-
-    //Event Listener
-    date_picker_element.addEventListener('click', toggleDatePicker);
-    next_mth_element =  addEventListener('click', goToNextMonth);
-    prev_mth_element =  addEventListener('click', goToPrevMonth);
-
-
-    // functions
-    function toggleDatePicker(e){
-
-        if (!checkEventPathForClass(e.path, 'dates'))
-        dates_element.classList.toggle('active');
-    }
-
-    function goToNextMonth(x){
-        month++;
-        if (month > 11){
-            month = 0;
-            year ++;
-        }
-        mth_element.textContent = month[month] + ' ' + year;
-        populateDate();
-    }
-
-    function goPrevMonth(x){
-        month--;
-        if (month > 0){
-            month = 11;
-            year --;
-        }
-        mth_element.textContent = month[month] + ' ' + year;
-        populateDate(); // ended here at 38:52
-    }
-
-    // most important func
-
-    function populateDate(z){
-        days_element.innerHTML = '';
-        let amount_days = 31;
-        if (month == 1){
-            amount_days = 28;
-        }
-
-        for (let z = 0; z <amount_days; z ++){
-            const days_element = document.createElement('div');
-            days_element.classList.add('day');
-            days_element.textContent = x + 1;
-
-            if(selectedDate == (z+1) && selectedYear == year && selectedMonth == month){
-                days_element.classList.add('selected');
-            }
-
-            days_element.addEventListener('click', function(){
-                selectedDate = new Date(year + '-' + (month +1) + '-' + (z +1));
-                selectedDay = (x +1);
-                selectedMonth = month;
-                selectedYear = year;
-                selected_date_element.textContent = formatDate(selectedDate);
-                selected_date_element.dataset.value = selectedDate;
-                });
-
-            days_element.appendChild(days_element);
-        }
-    }
-
-    // helper function
-    function checkEventPathForClass(path, selector){
-        for(let x =0; x< path.length; x++){
-            if(path[x].classList && path[x].classList.contains(selector)){
-                return true; // doesn't open and close like its supposed to
-            }
-        }
-
-        return false
-    }
-    function formatDate(z){
-        let day = z.getDate();
-        if (day <10){
-            day ='0' + day;
-        }
-        let month = z.getMonth() +1;
-        if (month<10) {
-            month = '0' + month;
-        }
-
-        let year = z.getFullYear();
-
-        return  day + "/" + month + '/' + year;
-    }
-
-</script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAubuClBmzeknheleX7MIY_4FmTGjJ_CKg&callback=initMap"
 type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="jquery.datetimepicker.full.min.js"></script>
+<script>
+    $('#picker').datetimepicker({
+        timepicker:false,
+        datepicker: true,
+        format: 'y-m-d',
+        value: '2020-02-04',
+        weeks: true,
+    })
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </html>

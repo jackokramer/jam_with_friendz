@@ -1,3 +1,7 @@
+#map{
+    width: 400px;
+    height: 400px;
+}
 * {
     margin: 0;
     padding: 0;
@@ -20,4 +24,75 @@ h1{
 h1 span{
     font-family: sans-serif, Arial, Helvetica;
     font-weight: 200;
+}
+
+.date-picker{
+    position: relative;
+    width: 90%;
+    max-width: 310px;
+    height:60px;
+    background-color: #fafafa;
+    margin: 30px auto;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, .2);
+    cursor: pointer;
+    user-select: none;
+}
+
+.date-picker .selected_date{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+}
+
+.date-picker:hover{
+    background-color: seashell;
+}
+
+.date-picker .dates{
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+}
+.date-picker .dates.active{
+    display: block;
+}
+.date-picker .dates .month{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #EEE;
+}
+.date-picker .dates .month .arrows{
+    width: 15px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #311311;
+    font-size: 20px;
+}
+date-picker .dates .month .arrows:hover{
+    background-color: skyblue;
+}
+date-picker .dates .month .arrows:active{
+    background-color:snow;
+}
+.date-picker .dates .days{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    height: 200px;
+}
+.date-picker .dates .days .day{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.date-picker .dates .days .day.selected{
+    background-color: steelblue;
+    color:#313131;
 }
