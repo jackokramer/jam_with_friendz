@@ -270,6 +270,19 @@
             days_element.classList.add('day');
             days_element.textContent = x + 1;
 
+            if(selectedDate == (z+1) && selectedYear == year && selectedMonth == month){
+                days_element.classList.add('selected');
+            }
+
+            days_element.addEventListener('click', function(){
+                selectedDate = new Date(year + '-' + (month +1) + '-' + (z +1));
+                selectedDay = (x +1);
+                selectedMonth = month;
+                selectedYear = year;
+                selected_date_element.textContent = formatDate(selectedDate);
+                selected_date_element.dataset.value = selectedDate;
+                });
+
             days_element.appendChild(days_element);
         }
     }
