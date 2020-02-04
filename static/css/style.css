@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: azure;
+    font-family: sans-serif, arial;
+}
+
+h1{
+    margin: 30px;
+    color: #313131;
+    font-size: 42px;
+    font-weight: 400;
+    text-align: center;
+}
+
+h1 span{
+    font-family: sans-serif, Arial, Helvetica;
+    font-weight: 200;
+}

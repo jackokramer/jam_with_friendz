@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Validation</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %} 
+        {% if messages %}
+            <ul class=flashes>                 
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <a href="/logout" class='text-left btn btn-primary btn-circle m-5 p-1'><buttton>Logout</buttton></a>
+    <h1 class="display-3 text-center"> Jam Session for /(Name)/ @ (location)</h1>
+        <nav class="navbar fixed-bottom navbar-dark bg-dark p-3 m-2">
+            <a class="navbar-brand" href="/homepage">Updates</a>
+            <a class="navbar-brand" href="/signups">SignUps</a>
+            <a class="navbar-brand" href="/stores">Local Shops/Venues</a>
+            <a class="navbar-brand" href="/concerts">Concerts Near You</a>
+            <a class="navbar-brand" href="/classes">Classes</a>
+        </nav>
+</body>
+</html>

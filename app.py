@@ -3,6 +3,8 @@ from mysqlConnect import connectToMySQL
 from flask_bcrypt import Bcrypt
 import re
 
+DATABASE = "jam"
+
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 app.secret_key = "burrito"
@@ -161,9 +163,42 @@ def signups():
     
 @app.route("/reherse", methods =['POST'])
 def reherese():
+    is_valid = True
+    if len(request.form['name'])<1:
+        is_valid = False
+        flash("name cannot be blank")
+    if len(request.form['number_of'])<1:
+        is_valid = False
+        flash("select a number between 1 and 9")
+    if len(request.form['date'])<10:
+        is_valid = False
+        flash("Please fill in the date in the appropriate format of 10 digits. 00/00/0000")
+    if len(request.form['location'])<6:
+        is_valid = False
+        flash('Please enter more than 6 characters')
+    if is_valid:
+        mysql = connectToMySQL('jam')
+        query = "INSERT into jams_sessions(name, number_of, date, location, created_at, updated_at) VALUES (%(nm)s, %(no)s, %(dt)s, %(lc)s, NOW(), NOW())"
+        data = {
+            'nm': request.form['name'],
+            'no': request.form['number_of'],
+            'dt': request.form['date'],
+            'lc': request.form['location']
+            }
+        mysql.query_db(query, data)
+        return redirect('/validated')
+
+@app.route("/validated")
+def validate():
     mysql = connectToMySQL('jam')
-    query = "INSERT into spaces(')"
-    return render_template('signus.html')
+    query = "SELECT * FROM jams_sessions WHERE user_id = %(id)s"
+    data = {
+        'id': session['user_id']
+    }
+    confirmed = mysql.query_db(query, data)
+    return render_template('validate.html')
+
+
 
 @app.route("/stores")
 def stores():
