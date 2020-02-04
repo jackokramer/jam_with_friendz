@@ -58,10 +58,14 @@ class User(db.Model):
     def profile_update(self, form):
         self.college = form['college']
         self.city = form['city']
+        self.major = form['major']
+        if self.instruments:
+            for instrument in self.instruments:
+                self.instruments.remove(instrument)
         for inst_id in form.getlist('instruments'):
             instrument = Instrument.query.get(inst_id)
             self.instruments.append(instrument)
-        self.genre = form['genre']
+        self.genre_id = form['genre']
         self.about = form['about']
         db.session.commit()
     

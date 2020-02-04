@@ -26,68 +26,70 @@
         {% endif %}
     {% endwith %}
     <br>
-        <a href="/logout" class='text-left btn btn-primary btn-circle m-5 p-1'><buttton>Logout</buttton></a>
-        <h2 class="text-right p-3 m-5">Hi {{user['first_name']}} {{user['last_name']}}!</h2>
-        <nav class="navbar navbar-info bg-info m-2 navbar-cirlce">
-            <!-- Navbar content -->
-            <h1 class="display-3 text-center">Create Your Profile</h1>
+    <a href="/logout" class='text-left btn btn-primary btn-circle m-5 p-1'><buttton>Logout</buttton></a>
+    <h2 class="text-right p-3 m-5">Hi {{user['first_name']}} {{user['last_name']}}!</h2>
+    <nav class="navbar navbar-info bg-info m-2 navbar-cirlce">
+        <!-- Navbar content -->
+    <h1 class="display-3 text-center">Create Your Profile</h1>
     <h3 class="p-3 m-2 text-center">Please fill out the rest of the required information to access the home page</h3>
     </nav>
     <br>
     <div class="container">
-        <div class="row">
-            <div class="col-lg">
-                <div class="card-title">Upload your Profile Photo</div>
+        <form action="/finish" method="POST">
+            <div class="row">
+                <div class="col-lg">
+                    <div class="card-title">Upload your Profile Photo</div>
                     <img src="{{ url_for('static', filename='imgs/duckduckgo.jpg') }}" alt ='gnome' style="width:200px;height:200px" class="border border-dark 1px p-2 rounded">
                     <br>
                     <br>
                     <input type="file" class="form-control-file text-center" id="exampleFormControlFile1">
                     <br>
                     <br>
-                    <form action="/finish" method="POST">
-                    <div class="form-group 20% p-1 m-2">
-                        <h4 for="formGroupExampleInput">College/University:</h4>
-                        <p><input type="text" name="college"></p>
+                        <div class="form-group 20% p-1 m-2">
+                            <h4 for="formGroupExampleInput">College/University:</h4>
+                            <p><input type="text" name="college" value="{{user.college}}"></p>
                         </div>
                         <div class="form-group 20% p-1 m-2">
-                        <h4 for="formGroupExampleInput2">City/Town</h4>
-                        <p><input type="text" name="city"><p>
-                            <br>
+                            <h4 for="formGroupExampleInput2">City/Town</h4>
+                            <p><input type="text" name="city" value="{{user.city}}"><p>
                         </div>
-                    </div>
-                    <div class="col-md">
-                        <h4>Instruments:</h4>
-                            <br>
-                                <p>Select some of the instruments you play:</p>
-                                {% for instrument in instruments %}
-                                <label for="{{instrument.name}}">{{instrument.name}}</label>
-                                <input type="checkbox" id="{{instrument.name}}" name="instruments" value="{{instrument.id}}">
-                                {% endfor %}
-                            <br>
-                            <br>
-                        <h4>Favorite Music Genre:</h4>
-                            <select name="genre">
-                                {% for genre in genres %}
-                                <option value="{{genre.id}}">{{genre.name}}</option>
-                                {% endfor %}
-                            </select>
-                            <br>
-                            <br>
-                        <h4>About you:</h4><textarea name="about" id="" cols="50" rows="10" class="form-group 20% m-5"></textarea>
-                        <input type="submit" value="Submit" class="btn btn-primary">
+                        <div class="form-group 20% p-1 m-2">
+                            <h4 for="formGroupExampleInput2">Major/Minor</h4>
+                            <p><input type="text" name="major" value="{{user.major}}"><p>
                         </div>
-                    </div>
-                </form>
                 </div>
+                <div class="col-md">
+                    <h4>Instruments:</h4>
+                        <br>
+                            <p>Select some of the instruments you play:</p>
+                            {% for instrument in instruments %}
+                            <label for="{{instrument.name}}">{{instrument.name}}</label>
+                            <input type="checkbox" id="{{instrument.name}}" name="instruments" value="{{instrument.id}}">
+                            {% endfor %}
+                        <br>
+                        <br>
+                    <h4>Favorite Music Genre:</h4>
+                        <select name="genre">
+                            {% for genre in genres %}
+                            <option value="{{genre.id}}">{{genre.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <br>
+                    <h4>About you:</h4><textarea name="about" id="" cols="50" rows="10" class="form-group 20% m-5">{{user.about}}</textarea>
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
     </div>
     <br>
-    
-      <nav class="navbar fixed-bottom navbar-dark bg-dark p-3 m-2">
+
+    <nav class="navbar fixed-bottom navbar-dark bg-dark p-3 m-2">
         <a class="navbar-brand" href="/homepage">Updates</a>
         <a class="navbar-brand" href="/signups">SignUps</a>
         <a class="navbar-brand" href="/stores">Local Shops/Venues</a>
         <a class="navbar-brand" href="/concert">Concerts Near You</a>
         <a class="navbar-brand" href="/classes">Classes</a>
-      </nav>
+    </nav>
 </body>
 </html>

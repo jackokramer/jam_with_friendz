@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <script
     src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
@@ -48,7 +48,7 @@
                             <br>
                             <h5>Instruments: {{instruments}}</h5>
                             <br>
-                            <h5>Musical Preferences: {{user.genre}}</h5>
+                            <h5>Musical Preferences: {{user.genre.name}}</h5>
                         <br>
                         <div>
                             <form action="/contact_user" method="post">
@@ -68,6 +68,10 @@
                                 <br>
                                     <h3 class="p-2">Posts:</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi deleniti in incidunt nostrum ipsam enim impedit repudiandae, amet fugit, suscipit quasi, sint nam perspiciatis repellendus sapiente neque dignissimos dolorem adipisci. Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi doloremque recusandae sunt expedita accusantium numquam iusto sapiente facilis corporis voluptatem sed obcaecati delectus, est vitae quis, velit dolores at quisquam.</p>
+                                    <br>
+                                    {% if current_user.id == user.id %}
+                                    <a href="/verif" class='text-left btn btn-primary btn-circle m-5 p-1'><button>Edit Profile</button></a>
+                                    {% endif %}
                                 <br>
                             <h1>Next Session/Availibility <a href="/sessions">Calendar</a></h1>
                         </div>
