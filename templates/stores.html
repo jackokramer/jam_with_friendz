@@ -43,10 +43,6 @@
                                     <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
                             </li>
                             <li class="lead">
-                                <h4 class="lead">Starving Musician</h4>
-                                    <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
-                            </li>
-                            <li class="lead">
                                 <h4 class="lead">Midtown Guitar Shop</h4>
                                     <p>926 Soquel Ave, Santa Cruz, CA 95062</p>
                             </li>
@@ -83,8 +79,15 @@
         function initMap(){
             var location = {lat: 36.974117, lng: -122.030792};
             var map = new google.maps.Map(
-        document.getElementById('map'), {zoom: 9, center: location});
+        document.getElementById('map'), {zoom: 13, center: location});
+        var store1 = new google.maps.Marker();
+        store1.setPosition({lat: 36.966639, lng:-122.040135});
+        store1.setMap(map);
+        //var concert1 = new google.maps.Marker()
+        //concert1.setPosition(location);
+        //concert1.setMap(map);
         }
+        
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAubuClBmzeknheleX7MIY_4FmTGjJ_CKg&callback=initMap"
     type="text/javascript"></script>

@@ -161,10 +161,10 @@ def signups():
         homes = homes[0]
     return render_template("signus.html", homes=homes)
     
-@app.route("/reherse", methods =['POST'])
-def reherese():
+@app.route("/rehearse", methods =['POST'])
+def rehearse():
     is_valid = True
-    if len(request.form['name'])<1:
+    if len(request.form['name'])<1: ## lots of if checks setting a vaibale to false with a return if the varibale was true and not one for false. Nested return is different than a regular return outside and at the end of the function the if checks
         is_valid = False
         flash("name cannot be blank")
     if len(request.form['number_of'])<1:
@@ -178,15 +178,18 @@ def reherese():
         flash('Please enter more than 6 characters')
     if is_valid:
         mysql = connectToMySQL('jam')
-        query = "INSERT into jams_sessions(name, number_of, date, location, created_at, updated_at) VALUES (%(nm)s, %(no)s, %(dt)s, %(lc)s, NOW(), NOW())"
+        query = "INSERT into jams_sessions(name, number_of, date, location, created_at, updated_at) VALUES (%(nm)s, %(no)s, NOW(), %(lc)s, NOW(), NOW())"
         data = {
             'nm': request.form['name'],
             'no': request.form['number_of'],
-            'dt': request.form['date'],
+            ##'dt': request.form['date'],
             'lc': request.form['location']
             }
         mysql.query_db(query, data)
-        return redirect('/validated')
+        return redirect('/validated') ## return statement here not sending to a redirect
+    
+    return redirect("/signups") # if fails
+
 
 @app.route("/validated")
 def validate():
@@ -198,6 +201,16 @@ def validate():
     confirmed = mysql.query_db(query, data)
     return render_template('validate.html')
 
+@app.route("/cancel/<jam_id>")
+def cancel():
+    mysql = connectToMySQL('jam')
+    query = "DELETE FROM jams_sessions WHERE jam_id = %(jd)s AND user_id = %(ui)s"
+    data = {
+        'jd': jam_id,
+        "ui": session['user_id']
+    }
+    mysql.query_db(query,data)
+    return redirect("/signups")
 
 
 @app.route("/stores")
@@ -220,4 +233,4 @@ def logout():
 
 
 if "__main__" == __name__:
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5003)
