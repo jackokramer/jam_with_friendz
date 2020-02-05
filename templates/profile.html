@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <script
     src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
@@ -28,10 +28,10 @@
         {% endwith %}
         <br>
             <a href="/logout" class='text-left btn btn-primary btn-circle m-5 p-1'><buttton>Logout</buttton></a>
-            <h2 class="text-right p-3 m-5">Hi {{users['first_name']}} {{users['last_name']}}!</h2>
+            <h2 class="text-right p-3 m-5">Hi {{current_user.first_name}} {{current_user.last_name}}!</h2>
             <nav class="navbar navbar-info bg-info m-2 navbar-cirlce">
                 <!-- Navbar content -->
-                <h1 class="display-3 text-center"> {{users['first_name']}} {{users['last_name']}} Profile</h1>        </nav>
+                <h1 class="display-3 text-center"> {{user.first_name}} {{user.last_name}} Profile</h1>        </nav>
         <br>
         <div class="container">
             <div class="row">
@@ -40,15 +40,15 @@
                         <img src="{{ url_for('static', filename='imgs/duckduckgo.jpg') }}" alt ='gnome' style="width:200px;height:200px" class="border border-dark 1px p-2 rounded">
                         <br>
                         <br>
-                            <h5>Name: <!-- Jinja String interpolation--></h5>
+                            <h5>Name: {{user.first_name}} {{user.last_name}}</h5>
                             <br>
-                            <h5>University/College: <!-- Jinja String interpolation--></h5>
+                            <h5>University/College: {{user.college}}</h5>
                             <br>
-                            <h5>Major/Minor: <!-- Jinja String interpolation--></h5>
+                            <h5>Major/Minor: {{user.major}}</h5>
                             <br>
-                            <h5>Instruments: <!-- Jinja String interpolation--></h5>
+                            <h5>Instruments: {{instruments}}</h5>
                             <br>
-                            <h5>Musical Preferences: <!-- Jinja String interpolation--></h5>
+                            <h5>Musical Preferences: {{user.genre.name}}</h5>
                         <br>
                         <div>
                             <form action="/contact_user" method="post">
@@ -64,10 +64,14 @@
                             <iframe src="https://open.spotify.com/embed/playlist/5vR79N0G9HTxGpCVwf9w8W" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                 <br>
                                     <h3 class="p-2">About:</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, eos quos distinctio natus dolores, porro officia fugiat minima dignissimos adipisci accusantium quia numquam ipsum vero eligendi architecto molestiae! Dolor, assumenda? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, quas, quae voluptatibus rerum iure minima amet quidem voluptatem consequatur illum modi earum voluptate unde doloribus totam, autem nobis incidunt hic!Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit sunt culpa nobis veritatis, sit voluptas cupiditate dolores omnis laboriosam! Vitae, animi nesciunt incidunt dignissimos error quas tempore expedita architecto velit.</p>
+                                    <p>{{user.about}}</p>
                                 <br>
                                     <h3 class="p-2">Posts:</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi deleniti in incidunt nostrum ipsam enim impedit repudiandae, amet fugit, suscipit quasi, sint nam perspiciatis repellendus sapiente neque dignissimos dolorem adipisci. Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi doloremque recusandae sunt expedita accusantium numquam iusto sapiente facilis corporis voluptatem sed obcaecati delectus, est vitae quis, velit dolores at quisquam.</p>
+                                    <br>
+                                    {% if current_user.id == user.id %}
+                                    <a href="/verif" class='text-left btn btn-primary btn-circle m-5 p-1'><button>Edit Profile</button></a>
+                                    {% endif %}
                                 <br>
                             <h1>Next Session/Availibility <a href="/sessions">Calendar</a></h1>
                         </div>
