@@ -1,4 +1,5 @@
 from flask import session, flash
+from datetime import datetime
 from config import db, bcrypt
 from sqlalchemy.sql import func, or_
 import re
@@ -28,6 +29,7 @@ class User(db.Model):
     about = db.Column(db.Text)
     major = db.Column(db.String(255))
     instruments = db.relationship('Instrument', secondary=user_instruments)
+    attended_sessions = db.relationship('Jam_session', secondary=attendance)
     genre_id = db.Column(db.Integer, db.ForeignKey('genre.id'))
     genre = db.relationship('Genre', foreign_keys=[genre_id], backref='users')
     proficiency = db.Column(db.String(255))
@@ -147,29 +149,58 @@ class Genre(db.Model):
         genre = cls.query.all()
         return genre
 
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.Text)
-    created_at = db.Column(db.DateTime, server_default=func.now())
-    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+# class Post(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     content = db.Column(db.Text)
+#     created_at = db.Column(db.DateTime, server_default=func.now())
+#     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
-class Rehearsal_space(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    location = db.Column(db.String(255))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
-    user = db.relationship('User', foreign_keys=[user_id], backref='spaces')
-    # available dates
-    created_at = db.Column(db.DateTime, server_default=func.now())
-    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+# class Rehearsal_space(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     location = db.Column(db.String(255))
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
+#     user = db.relationship('User', foreign_keys=[user_id], backref='spaces')
+#     # available dates
+#     created_at = db.Column(db.DateTime, server_default=func.now())
+#     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
 class Jam_session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    start_time = db.Column(db.DateTime)
-    end_time = db.Column(db.DateTime)
-    space_id = db.Column(db.Integer, db.ForeignKey('rehearsal_space.id', ondelete='cascade'), nullable=False)
-    space = db.relationship('Rehearsal_space', foreign_keys=[space_id], backref='sessions')
+    name = db.Column(db.String(255))
+    location = db.Column(db.String(255))
+    date = db.Column(db.DateTime)
+    attendance_limit = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
     host = db.relationship('User', foreign_keys=[user_id], backref='sessions')
-    attendance_limit = db.Column(db.Integer)
+    attendees = db.relationship('User', secondary=attendance)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+
+    @classmethod
+    def jam_validate(cls, form):
+        is_valid = True
+        if len(form['name'])<1: ## lots of if checks setting a vaibale to false with a return if the varibale was true and not one for false. Nested return is different than a regular return outside and at the end of the function the if checks
+            is_valid = False
+            flash("name cannot be blank")
+        if len(form['number_of'])<1:
+            is_valid = False
+            flash("select a number between 1 and 9")
+        if len(form['date'])<10:
+            is_valid = False
+            flash("Please fill in the date in the appropriate format of 10 digits. 00/00/0000")
+        if len(form['location'])<6:
+            is_valid = False
+            flash('Please enter more than 6 characters')
+        return is_valid
+    @classmethod
+    def add_new_session(cls, form):
+        new_session = cls(
+            name = form['name'],
+            location = form['location'],
+            date = datetime.strptime(form['date'], '%Y-%m-%d'),
+            attendance_limit = form['number_of'],
+            user_id = session['user_id']
+        )
+        db.session.add(new_session)
+        db.session.commit()
+        return new_session

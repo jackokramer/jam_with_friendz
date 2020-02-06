@@ -1,5 +1,5 @@
 from config import db
-from models import User, Instrument, Genre, Post, Rehearsal_space, Jam_session
+from models import User, Instrument, Genre, Jam_session
 from flask import render_template, request, redirect, session, flash
 import re
 
@@ -53,8 +53,18 @@ def signups():
     return render_template("signus.html", homes=user)
     
 def rehearse():
-    # create new rehearsal
-    return render_template('signus.html')
+    is_valid = Jam_session.jam_validate(request.form)
+    if not is_valid:
+        return redirect('/signups')
+    session = Jam_session.add_new_session(request.form)
+    return redirect('/validated')
+
+def validate():
+    user = User.current_user(session['user_id'])
+    return render_template('validate.html', user=user)
+
+def cancel(id):
+    pass
 
 def stores():
     return render_template('stores.html')
