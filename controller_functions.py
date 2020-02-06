@@ -1,6 +1,7 @@
 from config import db
 from models import User, Instrument, Genre, Jam_session
 from flask import render_template, request, redirect, session, flash
+from datetime import datetime
 import re
 
 def index():
@@ -56,15 +57,20 @@ def rehearse():
     is_valid = Jam_session.jam_validate(request.form)
     if not is_valid:
         return redirect('/signups')
-    session = Jam_session.add_new_session(request.form)
-    return redirect('/validated')
+    jam = Jam_session.add_new_session(request.form)
+    return redirect(f'/validated/{jam.id}')
 
-def validate():
+def validate(id):
     user = User.current_user(session['user_id'])
-    return render_template('validate.html', user=user)
+    jam = Jam_session.current_session(id)
+    if user == jam.host:
+        jam_date = jam.date.strftime('%b %d, %Y')
+        return render_template('validate.html', jam=jam, jam_date=jam_date)
+    return redirect('/signups')
 
 def cancel(id):
-    pass
+    Jam_session.cancel_session(id)
+    return redirect('/signups')
 
 def stores():
     return render_template('stores.html')

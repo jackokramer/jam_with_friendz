@@ -204,3 +204,12 @@ class Jam_session(db.Model):
         db.session.add(new_session)
         db.session.commit()
         return new_session
+    @classmethod
+    def current_session(cls, id):
+        session = cls.query.get(id)
+        return session
+    @classmethod
+    def cancel_session(cls, id):
+        to_delete = cls.current_session(id)
+        db.session.delete(to_delete)
+        db.session.commit()
