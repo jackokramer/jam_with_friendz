@@ -27,19 +27,19 @@
             {% endif %}
         {% endwith %}
         <br>
-        <div class="container">
             <a href="/logout" class='text-left btn btn-primary btn-circle m-5 p-1'><buttton>Logout</buttton></a>
             <h2 class="text-right p-3 m-5">Hi {{current_user.first_name}} {{current_user.last_name}}!</h2>
             <nav class="navbar navbar-info bg-info m-2 navbar-cirlce">
                 <!-- Navbar content -->
-                <h1 class="display-3 text-center" style="color:rgba(255, 255, 255, 0.781)"> {{user.first_name}} {{user.last_name}} Profile</h1> </nav>
+                <h1 class="display-3 text-center"> {{user.first_name}} {{user.last_name}} Profile</h1>        </nav>
         <br>
+        <div class="container">
             <div class="row">
                 <div class="col-lg">
-                    <div class="card-title text-center">Profile Photo</div>
-                        <img src="{{ url_for('static', filename='imgs/duckduckgo.jpg') }}" alt ='gnome' style="width:200px;height:200px" class=" mx-auto border border-dark 1px p-2 rounded">
+                    <div class="card-title">Profile Photo</div>
+                        <img src="{{ url_for('static', filename='imgs/duckduckgo.jpg') }}" alt ='gnome' style="width:200px;height:200px" class="border border-dark 1px p-2 rounded">
                         <br>
-                        <div class="bg-secondary text-center shadow-sm p-3 mb-5 bg-light rounded" style="color:black">
+                        <br>
                             <h5>Name: {{user.first_name}} {{user.last_name}}</h5>
                             <br>
                             <h5>University/College: {{user.college}}</h5>
@@ -49,37 +49,34 @@
                             <h5>Instruments: {{instruments}}</h5>
                             <br>
                             <h5>Musical Preferences: {{user.genre.name}}</h5>
-                        </div>
-                        <div class="bg-secondary">
+                        <br>
+                        <div>
                             <form action="/contact_user" method="post">
-                                <h4 style="color:white" class="text-center">Shoot A Message:</h4>
+                                <h4>Shoot A Message:</h4>
                                     <textarea name="about" id="" cols="50" rows="10" class="form-group 20% m-5"></textarea>
                                     <input type="submit" value="Submit" class="btn btn-primary">
                             </form>
                         </div>
                         <br>
-                        <br>
-                        <br>
                     </div>
-                        <div class="col-md bg-secondary">
-                            <h4 style="color:whitesmoke"> Uploads:</h4>
+                        <div class="col-md">
+                            <h4> Uploads:</h4>
                             <iframe src="https://open.spotify.com/embed/playlist/5vR79N0G9HTxGpCVwf9w8W" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                 <br>
-                                    <h3 class="p-2" style="color:white">About:</h3>
-                                    <p style="color:white">{{user.about}}</p>
+                                    <h3 class="p-2">About:</h3>
+                                    <p>{{user.about}}</p>
                                 <br>
-                                    <h3 class="p-2" style="color:white">Posts:</h3>
-                                    <p style="color:white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi deleniti in incidunt nostrum ipsam enim impedit repudiandae, amet fugit, suscipit quasi, sint nam perspiciatis repellendus sapiente neque dignissimos dolorem adipisci. Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi doloremque recusandae sunt expedita accusantium numquam iusto sapiente facilis corporis voluptatem sed obcaecati delectus, est vitae quis, velit dolores at quisquam.</p>
+                                    <h3 class="p-2">Posts:</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi deleniti in incidunt nostrum ipsam enim impedit repudiandae, amet fugit, suscipit quasi, sint nam perspiciatis repellendus sapiente neque dignissimos dolorem adipisci. Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi doloremque recusandae sunt expedita accusantium numquam iusto sapiente facilis corporis voluptatem sed obcaecati delectus, est vitae quis, velit dolores at quisquam.</p>
                                     <br>
                                     {% if current_user.id == user.id %}
                                     <a href="/verif" class='text-left btn btn-primary btn-circle m-5 p-1'><button>Edit Profile</button></a>
                                     {% endif %}
-                            <h1 style="color:whitesmoke">Next Session/Availibility <a href="/sessions">Calendar</a></h1>
+                                <br>
+                            <h1>Next Session/Availibility <a href="/sessions">Calendar</a></h1>
                         </div>
                     </div>
         </div>
-        <br>
-        <br>
         <br>
 
         <nav class="navbar fixed-bottom navbar-dark bg-dark p-3 m-2">

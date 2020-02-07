@@ -76,22 +76,19 @@ class User(db.Model):
         is_valid = True
         if not EMAIL_REGEX.match(form['email']):
             is_valid = False
-            flash("please enter in a valid email")
+            flash("please enter in a valid email", "reg_em")
         if form['password'] != form['c_password']:
             is_valid = False
-            flash('passwords must match')
+            flash('passwords must match', "reg_cp")
         if len(form['first_name']) < 1:
             is_valid = False
-            flash("please use more than one character")
+            flash("please use more than one character", "reg_fn")
         if len(form['last_name']) < 1:
             is_valid = False
-            flash("please use more than one character")
+            flash("please use more than one character", "reg_ln")
         if len(form['password']) < 8:
             is_valid = False
-            flash("please use more than eight characters")
-        if len(form['c_password']) < 8:
-            is_valid = False
-            flash("please use more than eight characters")
+            flash("please use more than eight characters", "reg_pw")
         return is_valid
     @classmethod
     def add_new_user(cls, form):
@@ -109,7 +106,7 @@ class User(db.Model):
     def log_validate(cls, form):
         user = cls.query.filter_by(email=form['email']).all()
         if not user:
-            flash('email doesnt exist', 'log_un')
+            flash("email doesn't exist", 'log_em')
         elif not bcrypt.check_password_hash(user[0].password, form['password']):
             flash('invalid password or email', 'log_pw')
         if '_flashes' in session.keys():

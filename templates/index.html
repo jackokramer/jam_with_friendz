@@ -15,103 +15,104 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <title>Home Page</title>
 </head>
-<body>
-            {% with messages = get_flashed_messages() %} 
-            {% if messages %}
-                <ul class=flashes>                 
-                {% for message in messages %}
-                    <p>{{message}}</p>
-                {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-        <br>
-    <h2>{{users['first_name']}} {{users['last_name']}}</h2>
-    <a href="/logout" class='text-left btn btn-primary btn-circle m-5 p-1'><button>Logout</button></a>
-    <a href="/profile/{{users.id}}" class='text-left btn btn-primary btn-circle m-5 p-1'><button>My Profile</button></a>
-        <h1 class="display-3 text-center">Home Page</h1>
-        <br>
-        <div class="shadow-sm p-3 mb-5 bg-light rounded">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+    <body>
+                {% with messages = get_flashed_messages() %} 
+                {% if messages %}
+                    <ul class=flashes>                 
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <br>
+        <h2 class="text-right p-3 m-4"> Hi {{users['first_name']}} {{users['last_name']}}</h2>
+        <a href="/logout" class='text-left btn btn-primary btn-circle m-5 p-1'><buttton>Logout</buttton></a>
 
-            <a class="navbar-brand" href="#!">Updates</a>
-          
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-              <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-                <li class="nav-item">
-                    <a class="navbar-link" href="/signups">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/stores">Local Shops/Venues</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/concerts">Upcoming Shows And Concerts</a>
-                  </li>
-              </ul>
+            <h1 class="display-3 text-center">Jam with Friends Home Page</h1>
+            <br>
+            <div class="shadow-sm p-3 mb-5 bg-light rounded">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a class="navbar-brand" href="#!">Updates</a>
+            
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signups">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/stores">Local Shops/Venues</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/concerts">Upcoming Shows And Concerts</a>
+                    </li>
+                    <li class="nav-item"> <a href="/profile/{{users.id}}" class='nav-link'>My Profile</a> 
+                </ul>
+                </div>
+            </nav>
             </div>
-          </nav>
-        </div>
-          <br>
-          <h2 class="p-3 m-2"> News Updates</h2>
-          <div class="card p-3 m-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg">
-                        <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                        <h4>Comings soon</h4>
-                        <br>
-                        <h6>Upcoming shows</h6>
-                        <br>
-                            <p class="col-lg">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione voluptas laborum, suscipit laudantium sint sequi soluta odit modi optio est maiores sed maxime minus animi! Ea deserunt deleniti explicabo. Laborum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ducimus ipsum tempora et odio quas libero, cumque fuga assumenda vel, sequi nostrum praesentium facere qui magni, dolore cum culpa corrupti. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, hic. Quo, repellendus aperiam iure earum dolores laudantium cum totam distinctio ipsa quisquam. Unde necessitatibus cumque eaque iste adipisci reiciendis totam!\
-                                <img class="d-flex ml-3" src="/images/pathToYourImage.png" alt="Generic placeholder image">
-                            </p>
+            <br>
+            <h2 class="p-3 m-2"> News Updates</h2>
+            <div class="card p-3 m-4 bg-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                            <h4>Comings soon</h4>
+                            <br>
+                            <h6>Upcoming shows</h6>
+                            <br>
+                                <p class="col-lg">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione voluptas laborum, suscipit laudantium sint sequi soluta odit modi optio est maiores sed maxime minus animi! Ea deserunt deleniti explicabo. Laborum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ducimus ipsum tempora et odio quas libero, cumque fuga assumenda vel, sequi nostrum praesentium facere qui magni, dolore cum culpa corrupti. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, hic. Quo, repellendus aperiam iure earum dolores laudantium cum totam distinctio ipsa quisquam. Unde necessitatibus cumque eaque iste adipisci reiciendis totam!\
+                                    <img class="d-flex ml-3" src="/images/pathToYourImage.png" alt="Generic placeholder image">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <img src="{{ url_for('static', filename='imgs/elvis.jpeg') }}" style="width:300px;height:300px" class="border border-dark 1px p-2 rounded" alt="prev_concert">
+                            <img src="{{ url_for('static', filename='imgs/guitar.jpeg') }}" style="width:235px;height:275px" class="border border-light 1px p-2 rounded" alt="prev_concert">
                         </div>
                     </div>
-                    <div class="col-md">
-                        <img src="{{ url_for('static', filename='imgs/elvis.jpeg') }}" style="width:200px;height:200px" class="border border-dark 1px p-2 rounded" alt="prev_concert">
-                        <img src="{{ url_for('static', filename='imgs/guitar.jpeg') }}" style="width:200px;height:200px" class="border border-dark 1px p-2 rounded" alt="prev_concert">
-                        <img src="{{ url_for('static', filename='imgs/girl.jpeg') }}" alt="prev_concert" style="width:200px;height:200px" class="border border-dark 1px p-2 rounded" >
-                    </div>
+                
+                <a href="#!" class="card-link">San Francisco Chronicle</a>
+                <a href="#!" class="card-link">Santa Curz Sentinel</a>
+                <a href="/concerts" class="card-link">Upcoming Shows</a>
                 </div>
-              
-              <a href="#!" class="card-link">Card link</a>
-              <a href="#!" class="card-link">Another link</a>
             </div>
-          </div>
-          <br>
-          <h2 class="p-3"> Archived News</h2>
-          <div class="card p-3 m-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg">
-                        <h4 class="card-title">Past Shows</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">Photos and more</h6>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione voluptas laborum, suscipit laudantium sint sequi soluta odit modi optio est maiores sed maxime minus animi! Ea deserunt deleniti explicabo. Laborum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ducimus ipsum tempora et odio quas libero, cumque fuga assumenda vel, sequi nostrum praesentium facere qui magni, dolore cum culpa corrupti. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, hic. Quo, repellendus aperiam iure earum dolores laudantium cum totam distinctio ipsa quisquam. Unde necessitatibus cumque eaque iste adipisci reiciendis totam!
-                        </p>
-                        <img class="d-flex ml-3" src="/images/pathToYourImage.png" alt="Generic placeholder image">
-                        <a href="#!" class="card-link">Photos</a>
-                        <a href="#!" class="card-link">Full Write Up</a>
-                    </div>
-                    <div class="col-md">
-                        <h3> Want to Learn:</h3>
-                        <ul>
-                            <li><a href="learn.html">Learn how to Play Guitar</a></li>
-                            <li><a href="learn.html">Learn how to Play Bass Guitar</a></li>
-                            <li><a href="learn.html">Learn how to Play Drums</a></li>
-                            <li><a href="learn.html">Learn how to Play the Cellio</a> </li>
-                        </ul>
-                        <br>
-                        <br>
-                        <a href="/signups" class="btn btn-success center">Sign Up</a>
+            <br>
+            <h2 class="p-3"> Archived News</h2>
+            <div class="card p-3 m-4 shadow p-3 mb-5 bg-light rounded bg-info">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg">
+                            <h4 class="card-title">Past Shows</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Photos and more</h6>
+                            <p class="card-text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione voluptas laborum, suscipit laudantium sint sequi soluta odit modi optio est maiores sed maxime minus animi! Ea deserunt deleniti explicabo. Laborum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ducimus ipsum tempora et odio quas libero, cumque fuga assumenda vel, sequi nostrum praesentium facere qui magni, dolore cum culpa corrupti. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, hic. Quo, repellendus aperiam iure earum dolores laudantium cum totam distinctio ipsa quisquam. Unde necessitatibus cumque eaque iste adipisci reiciendis totam!
+                            </p>
+                            <img src="{{ url_for('static', filename='imgs/girl.jpeg') }}" alt="prev_concert" style="width:200px;height:300px" class="border border-grey 1px p-2 rounded" >
+                            <a href="#!" class="card-link">Photos</a>
+                            <a href="#!" class="card-link">Full Write Up From the Times</a>
+                        </div>
+                        <div class="col-md shadow-sm p-3 mb-5 bg-light rounded">
+                            <h3> Want to Learn:</h3>
+                            <ul>
+                                <li><a href="learn.html">Learn how to Play Guitar</a></li>
+                                <li><a href="learn.html">Learn how to Play Bass Guitar</a></li>
+                                <li><a href="learn.html">Learn how to Play Drums</a></li>
+                                <li><a href="learn.html">Learn how to Play the Cellio</a> </li>
+                            </ul>
+                            <br>
+                            <br>
+                            <a href="/signups" class="btn btn-success center">Sign Up</a>
+                        </div>
                     </div>
                 </div>
             </div>
-          </div>
 
-</body>
+    </body>
 </html>

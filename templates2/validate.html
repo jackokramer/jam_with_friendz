@@ -22,14 +22,10 @@
     <h1 class="display-3 text-center"> Jam Session for /{{jam.host.first_name}} {{jam.host.last_name}}/ @ {{jam.location}}</h1>
 
     <div class="jumbotron">
-        <div class="card-header">
-        <h1 class="display-3 text-center">Scheduled Jam</h1>
-        </div>
-        <h5 class="lead text-center">Capacity: {{jam.attendance_limit}}</h5>
+        <h1 class="display-3">Scheduled Jam</h1>
+        <p class="lead">Capacity: {{jam.attendance_limit}}</p>
         <hr class="my-2">
-        <img src="{{ url_for('static', filename='imgs/studiof.jpeg') }}" alt="prev_concert" style="width:600px;height:300px" class=" mx-auto 1px p-2 rounded card" >
-        <h5 class="text-center">Date: {{jam_date}}</h4>
-            <p class="text-center p-3 m-4"> Please show up 20 minutes before your booking. We have cables and cabinets availalbe for rent for an additional charge. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam deleniti recusandae, nisi sapiente, iure alias consequuntur nihil provident assumenda eius consectetur quibusdam tempora vero in asperiores officiis enim dolorem. Enim. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto eos suscipit, molestiae obcaecati iure cupiditate id ut facere modi cum totam voluptatem recusandae repudiandae, unde repellat vero facilis aut. Repellat?</p>
+        <p>Date: {{jam_date}}</p>
         <p class="lead">
           <a class="btn btn-danger btn-lg" href="/cancel/{{jam.id}}" role="button">Cancel</a>
         </p>

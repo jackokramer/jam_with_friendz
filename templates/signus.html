@@ -7,21 +7,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> <!--Assuming staic everything in the folder-->
     <link href="jquery.datetimepicker.min.css" rel="stylesheet">   
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-    crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
 
     <title>Sign Ups</title>
     
 </head>
 <body>
     <a href="/logout" class='text-left btn btn-primary btn-circle m-5 p-1'><buttton>Logout</buttton></a>
-        <h3 class="text-right m-3">{{homes['first_name']}} {{homes['last_name']}}</h3>
+        <h3 class="text-right m-3 p-5"> Hi {{homes['first_name']}} {{homes['last_name']}}</h3>
     <h1 class="display-3 text-center">Sign Up and Jam</h1>
         <br>
         <div style="overflow:hidden;">
@@ -33,42 +25,30 @@
                 </div>
             </div>
         </div>
-            <!--
-            <h1 class="text-center">Custom <span>DATE </span>Picker</h1>
-                <div class='date-picker'> 
-                    <div class="selected-date text-center"> 02/03/2020 </div>
-
-                        <div class='dates'>
-                            <div class="month">
-                                    <div class="arrows prvs-mtn">&lt;</div>
-                                    <div class="mth">February 2020</div>
-                                    <div class="arrows next-mtn">&gt;</div>
-                                <div class="days">
-
-                                </div>
-                        </div>
-                        </div>
-                </div>
-            <div class="container mt-5 mb-5" style="width: 400px">
-                <h3>Date Picker</h3>
-                <input type="text" id="picker" class="form-control">
-            </div>
-                -->
         <div class="jumbotron p-3 m-3">
-            <h3 class="p-2 m-3">Rehearsal Space Availbilities</h3>
-        <div class="row">
+            <h3 class="p-2 m-3 text-center">Rehearsal Space SignUps</h3>
+        <div class="container-fluid">
             <div class="col-md">
-                <form action="/rehearse" method="post" class="p-4 m-5">
-                    <p>Name:<input type="text" name="name"></p>
-                    <p>Number of People:<input type="text" name="number_of"></p>
-                    <p>Choose a Date: <input type="date" name="date"></p>
-                    <p>Location: <input type="text" name="location"></p>
-                    <input type="submit" value="Sign Up">
-                </form>
-                <div class="col-ld m-5 pb-3">
+                <div class="card" style='width: 50rem'>
+                    <div class="text-center"><img src="{{ url_for('static', filename='imgs/ready.jpeg') }}" alt="prev_concert" style="width:600px;height:300px" class=" position-center border border-dark 1px p-2 rounded card" >
+                    </div>
+                    <h3 class="card-header">Sign Up Here</h3>
+                    <div class="card-body bg-dark">
+                    <form action="/rehearse" method="post" class="p-4 m-5" style="color:white">
+                        <p>Name: <input type="text" name="name"></p>
+                        <p>Number of People: <input type="text" name="number_of"></p>
+                        <p>Choose a Date: <input type="date" name="date"></p>
+                        <p>Location: <input type="text" name="location"></p>
+                        <input type="submit" value="Sign Up" class="btn-primary">
+                    </form>
+                    </div>
+            </div>
+                <div class="col-sm m-5 pb-3">
+                    <div class="card">
                         <h3 class="text-center">Locations</h3>
                         <br>   
-                    <div id="map" style="width:65%;height:275px;" class="center">
+                        <div id="map" style="width:65%;height:275px;" class="card-img">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -87,33 +67,29 @@
     function initMap(){
         var location = {lat: 36.974117, lng: -122.030792};
         var map = new google.maps.Map(
-    document.getElementById('map'), {zoom: 9, center: location});
+    document.getElementById('map'), {zoom: 13, center: location});
+    var reherse1 = new google.maps.Marker();
+    reherse1.setPosition({lat: 36.977250, lng: -122.032294});
+    reherse1.setMap(map);
+    var reherse2 = new google.maps.Marker();
+    reherse2.setPosition({lat: 36.964216, lng:-122.045216});
+    reherse2.setMap(map);
+    var reherse3 = new google.maps.Marker();
+    reherse3.setPosition({lat: 36.965821, lng:-122.022480})
+    reherse3.setMap(map);
+    var reherse4 = new google.maps.Marker();
+    reherse4.setPosition({lat: 36.985446, lng:-122.031437})
+    reherse4.setMap(map);
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAubuClBmzeknheleX7MIY_4FmTGjJ_CKg&callback=initMap"
 type="text/javascript"></script>
-<!--
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script src="jquery.datetimepicker.full.min.js"></script>
-<script>
-    $('#picker').datetimepicker({
-        timepicker:false,
-        datepicker: true,
-        format: 'y-m-d',
-        value: '2020-02-04',
-        weeks: true,
-    })
-</script>
-            <script type="text/javascript">
-                $(function () {
-                    $('#datetimepicker12').datetimepicker({
-                        inline: true,
-                        sideBySide: true
-                    });
-                });
-            </script>
--->
+<script
+src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </html>

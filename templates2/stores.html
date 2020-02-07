@@ -19,7 +19,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <title>Store & Shops</title>
+    <title>Store&Shops</title>
 </head>
 <body>
     <a href="/logout" class='text-left btn btn-primary btn-circle m-5 p-1'><buttton>Logout</buttton></a>
@@ -28,30 +28,27 @@
     <div class="jumbotron">
             <div class="row">
                 <div class="col-md p-4 m-3">
-                    <div class='card p-2 m-3'>
-                        <h1 class="display-3 card-header">Local Stores</h1>
-                            <br>
-                                <ul>
-                                    <li class="lead"> <h4>Sylvan Music</h4> 
-                                        <p>1521 Mission St, Santa Cruz, CA 95060</p>
-                                    </li>
-                                    <li class="lead">
-                                        <h4 class="lead">Starving Musician</h4>
-                                            <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
-                                    </li>
-                                    <li class="lead">
-                                        <h4 class="lead">More Music</h4>
-                                            <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
-                                    </li>
-                                    <li class="lead">
-                                        <h4 class="lead">Midtown Guitar Shop</h4>
-                                            <p>926 Soquel Ave, Santa Cruz, CA 95062</p>
-                                    </li>
-                                </ul>
-                                <br>
-                        </div>
-                        <div class="card p-2 m-3">
-                            <h2 class="p-3 m-3 card-header">Concert Halls/ Venues</h2>
+                <h1 class="display-3">Local Stores</h1>
+                    <br>
+                        <ul>
+                            <li class="lead"> <h4>Sylvan Music</h4> 
+                                <p>1521 Mission St, Santa Cruz, CA 95060</p>
+                            </li>
+                            <li class="lead">
+                                <h4 class="lead">Starving Musician</h4>
+                                    <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
+                            </li>
+                            <li class="lead">
+                                <h4 class="lead">More Music</h4>
+                                    <p>1003 Pacific Ave, Santa Cruz, CA 95060</p>
+                            </li>
+                            <li class="lead">
+                                <h4 class="lead">Midtown Guitar Shop</h4>
+                                    <p>926 Soquel Ave, Santa Cruz, CA 95062</p>
+                            </li>
+                        </ul>
+                        <br>
+                            <h2 class="p-3 m-3">Concert Halls/ Venues</h2>
                             <ul>
                                 <li class="lead"> <h4>The Catalyst</h4> 
                                     <p>1011 Pacific Ave, Santa Cruz, CA 95060</p>
@@ -62,12 +59,10 @@
                                 <li class="lead"> <h4>Civic Auditorium</h4> 
                                     <p>307 Church St, Santa Cruz, CA 95060</p>
                                 </li>
-                            </ul>
-                        </div>
+                        </ul>
                     </div>
-                        <h1>Locations: </h1>
-                        <div id="map" class="col-md p-4 m-3 card">
-                         
+                        <div id="map" class="col-md p-4 m-3">
+                            <h1>Locations</h1>
                     </div>
             </div>
       </div>
@@ -75,10 +70,10 @@
     <nav class="navbar fixed-bottom navbar-dark bg-dark p-3 m-2">
         <a class="navbar-brand" href="/homepage">Updates</a>
         <a class="navbar-brand" href="/signups">SignUps</a>
-        <a class="navbar-brand" href="/local">Local Stores</a>
+        <a class="navbar-brand" href="/local">Locals</a>
         <a class="navbar-brand" href="/concerts">Concerts Near You</a>
         <a class="navbar-brand" href="/classes">Classes</a>
-    </nav>
+      </nav>
 </body>
     <script>
         function initMap(){
@@ -88,28 +83,9 @@
         var store1 = new google.maps.Marker();
         store1.setPosition({lat: 36.966639, lng:-122.040135});
         store1.setMap(map);
-        var store1 = new google.maps.Marker();
-        store1.setPosition({lat: 36.966639, lng:-122.040135});
-        store1.setMap(map);
-        var store2 = new google.maps.Marker();
-        store2.setPosition({lat: 36.972296, lng:-122.024022});
-        store2.setMap(map);
-        var store3 = new google.maps.Marker();
-        store3.setPosition({lat: 36.971062, lng:-122.025705});
-        store3.setMap(map);
-        var store4 = new google.maps.Marker();
-        store4.setPosition({lat: 36.978318, lng:-122.013086});
-        store4.setMap(map);
-        // Venues
-        var concert1 = new google.maps.Marker();
-        concert1.setPosition({lat: 36.971358, lng:-122.025662});
-        concert1.setMap(map);
-        var concert3 = new google.maps.Marker();
-        concert3.setPosition({lat: 36.973718, lng:-122.028953});
-        concert3.setMap(map);
-        var concert2 = new google.maps.Marker();
-        concert2.setPosition({lat:36.987724, lng:-121.982968});
-        concert2.setMap(map);
+        //var concert1 = new google.maps.Marker()
+        //concert1.setPosition(location);
+        //concert1.setMap(map);
         }
         
     </script>
